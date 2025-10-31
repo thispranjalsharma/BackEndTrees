@@ -12,6 +12,14 @@ export class TreeService {
     constructor(@InjectModel("Tree") private treeModel: Model<TreeDocument>) { }
 
 
+    async findOne(id: string): Promise<Tree> {
+        const tree = await this.treeModel.findById(id).exec();
+        if (!tree) {
+            throw new NotFoundException(`Tree with ID "${id}" not found`);
+        }
+        return tree;
+    }
+
 
     async update(id: string, updateTreeDto: UpdateTreeDto): Promise<Tree> {
         const treeToUpdate = await this.treeModel.findById(id);

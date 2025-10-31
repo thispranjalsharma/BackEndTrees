@@ -25,6 +25,13 @@ export class TreeController {
     ) { }
 
 
+    @Get(":id")
+    async findOne(@Param('id') id: string) {
+        return this.treeService.findOne(id)
+    }
+
+
+
     @Patch(':id')
     @UsePipes(new ValidationPipe({ whitelist: true, transform: true }))
     async update(
