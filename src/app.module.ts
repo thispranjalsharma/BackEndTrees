@@ -3,6 +3,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { TreeModule } from './tree/tree.module';
 import { CloudinaryModule } from './common/cloudinary/cloudinary.module';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
 
 
 
@@ -22,5 +24,8 @@ import { CloudinaryModule } from './common/cloudinary/cloudinary.module';
     CloudinaryModule,
     TreeModule,
   ],
+  controllers: [AppController],
+  providers: [AppService]
+
 })
 export class AppModule { }
