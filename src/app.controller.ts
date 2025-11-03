@@ -3,7 +3,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { CloudinaryService } from './common/cloudinary/cloudinary.service';
 import { AppService } from './app.service';
 
-@Controller('tree')
+@Controller()
 export class AppController {
   constructor(private readonly appService: AppService) { }
 
