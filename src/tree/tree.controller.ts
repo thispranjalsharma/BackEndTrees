@@ -31,6 +31,22 @@ export class TreeController {
     }
 
 
+    @Patch(':id/image')
+    @UseInterceptors(FileInterceptor('image'))
+    async updateImage(
+        @Param('id') id: string,
+        @UploadedFile() file: Express.Multer.File,
+    ) {
+        if (!file) {
+            throw new BadRequestException('Image file is required');
+        }
+
+        const uploadResult = await this.cloudinaryService.uploadImage(file);
+
+        return this.treeService.update(id, { metadata: { image: uploadResult.secure_url } });
+    }
+
+
 
     @Patch(':id')
     @UsePipes(new ValidationPipe({ whitelist: true, transform: true }))
